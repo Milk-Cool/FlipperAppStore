@@ -39,7 +39,10 @@ const main = async () => {
 		flipper = await navigator.serial.requestPort({ "filters": [{ "usbVendorId": 0x0483 }] });
 		await flipper.open({ "baudRate": 9600 });
 	}
-	navigator.serial.addEventListener("disconnect", () => flipper = null);
+	navigator.serial.addEventListener("disconnect", () => {
+		flipper = null;
+		connected = false;
+	});
 	writer = flipper.writable.getWriter();
 	setTimeout(async () => {
 		while(flipper.readable){
@@ -99,6 +102,7 @@ const installScreen = async app => {
 		label.innerText = i;
 		$("#categories").appendChild(label);
 	}
+	let n = 0;
 	for(let i of applications){
 		let appDiv = document.createElement("div");
 		appDiv.classList.add(`category_${i.category}`);
@@ -122,13 +126,13 @@ const installScreen = async app => {
 		name.innerText = await getAppName(i);
 		appDiv.appendChild(name);
 		
-		let category = document.createElement("h1");
-		category.style.marginLeft = "30px";
-		category.style.display = "inline-block";
-		category.style.height = "100px";
-		category.style.color = "gray";
-		category.innerText = i.category;
-		appDiv.appendChild(category);
+		let info = document.createElement("h1");
+		info.style.marginLeft = "30px";
+		info.style.display = "inline-block";
+		info.style.height = "100px";
+		info.style.color = "gray";
+		info.innerText = `${i.author} | ${i.category}`;
+		appDiv.appendChild(info);
 		
 		let right = document.createElement("div");
 		right.style.position = "absolute";
@@ -153,6 +157,8 @@ const installScreen = async app => {
 		right.appendChild(moreButton);
 		
 		$("#apps").appendChild(appDiv);
+		
+		$("#load").innerText = ` (${++n}/${applications.length})`;
 	}
 	const sortedApps = Array.from($("#apps").children).sort((x, y) => x.querySelector(".app_name").innerText > y.querySelector(".app_name").innerText ? 1 : -1);
 	for(let i of $("#apps").children)
@@ -176,7 +182,7 @@ setInterval(() => {
 		default:
 			$("#status").innerText = "Loading...";
 	}
-	if(flipper === null){
+	if(connected){
 		$("#connect").innerText = "Connect";
 		$("#connect").disabled = false;
 	}else{

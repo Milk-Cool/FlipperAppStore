@@ -8,3 +8,8 @@ const getAppName = app => new Promise((resolve, reject) => {
 		resolve(res.match(/name="(?<name>.+)"/).groups.name);
 	}).catch(() => resolve(app.name));
 });
+const getAppDescription = app => new Promise((resolve, reject) => {
+	fetch(`https://api.github.com/repos/${app.path}`).then(res => res.json()).then(async res => {
+		resolve(res.description || "No description");
+	}).catch(() => resolve("No description"));
+});
