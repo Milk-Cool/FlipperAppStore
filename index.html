@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flipper Zero App Store</title>
+		<meta charset="utf-8">
+		<script src="reposlist.js" async></script>
+		<script src="app.js"></script>
+		<script src="repos.js"></script>
+		<script src="github.js"></script>
+		<script src="fap.js"></script>
+		<script src="script.js" defer async></script>
+		<link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css"> 
+		<style>
+			textarea {
+				width: 600px;
+				height: 400px;
+			}
+			.loading {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background: white;
+				z-index: 1;
+			}
+			#status {
+				position: fixed;
+				top: 50vh;
+				left: 50vw;
+				transform: translate(-50%, -50%);
+			}
+		</style>
+	</head>
+	<body style="padding: 2em">
+		<button onclick="main()" id="connect">Connect</button><br>
+		<details>
+			<summary> Debug information </summary><br>
+			<h2>Output:</h2>
+			<textarea readonly id="Dout_hex"></textarea>
+			<textarea readonly id="Dout_text"></textarea>
+			<h2>Input:</h2>
+			<textarea readonly id="Din_hex"></textarea>
+			<textarea readonly id="Din_text"></textarea>
+		</details>
+		<h2 id="categories"></h2>
+		<div class="loading">
+			<h1 id="status"></h1>
+		</div>
+		<div id="apps"></div>
+	</body>
+</html>
