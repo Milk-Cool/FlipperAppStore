@@ -50,7 +50,7 @@ const main = async () => {
 			let dataIn = "";
 			while(true){
 				const { value, done } = await reader.read();
-				connected = true;
+				if(value) connected = true;
 				const textValue = Array.from(value).filter(x => x != 0x07).map(x => String.fromCharCode(x)).join("");
 				$("#Din_hex").value += Array.from(value).map(x => x.toString(16).toUpperCase().padStart(2, "0") + " ").join("");
 				$("#Din_text").value += textValue;
@@ -160,6 +160,7 @@ const installScreen = async app => {
 		
 		$("#load").innerText = ` (${++n}/${applications.length})`;
 	}
+	$("#load").innerText = "";
 	const sortedApps = Array.from($("#apps").children).sort((x, y) => x.querySelector(".app_name").innerText > y.querySelector(".app_name").innerText ? 1 : -1);
 	for(let i of $("#apps").children)
 		i.remove();
@@ -182,7 +183,7 @@ setInterval(() => {
 		default:
 			$("#status").innerText = "Loading...";
 	}
-	if(connected){
+	if(!connected){
 		$("#connect").innerText = "Connect";
 		$("#connect").disabled = false;
 	}else{
