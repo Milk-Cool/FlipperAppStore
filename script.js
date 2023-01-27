@@ -130,15 +130,27 @@ const installScreen = async app => {
 		category.innerText = i.category;
 		appDiv.appendChild(category);
 		
+		let right = document.createElement("div");
+		right.style.position = "absolute";
+		right.style.right = "40px";
+		right.style.display = "inline-block";
+		appDiv.appendChild(right);
+		
 		let downloadButton = document.createElement("button");
 		downloadButton.style.display = "inline-block";
-		downloadButton.style.position = "absolute";
 		downloadButton.style.height = "80px";
 		downloadButton.style.margin = "10px";
-		downloadButton.style.right = "40px";
-		downloadButton.innerText = "Download";
+		downloadButton.innerText = "Install";
 		downloadButton.onclick = () => installScreen(i);
-		appDiv.appendChild(downloadButton);
+		right.appendChild(downloadButton);
+		
+		let moreButton = document.createElement("button");
+		moreButton.style.display = "inline-block";
+		moreButton.style.height = "80px";
+		moreButton.style.margin = "10px";
+		moreButton.innerText = "More";
+		moreButton.onclick = () => window.open("https://github.com/" + i.path);
+		right.appendChild(moreButton);
 		
 		$("#apps").appendChild(appDiv);
 	}
