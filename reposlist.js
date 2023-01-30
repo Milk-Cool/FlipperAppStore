@@ -28,7 +28,8 @@ const reposList = {
 		"bmatcuk/flipperzero-qrcode/main",
 		"litui/dtmf_dolphin/main",
 		"Hong5489/ir_remote/main",
-		"polarikus/flipper-zero_bc_scanner_emulator/main"
+		"polarikus/flipper-zero_bc_scanner_emulator/main",
+		"zacharyweiss/magspoof_flipper/main"
 	],
 	"GPIO": [
 		"quen0n/unitemp-flipperzero/master",
