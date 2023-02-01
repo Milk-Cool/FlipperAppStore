@@ -11,7 +11,8 @@ const reposList = {
 		"antirez/flipper-asteroids/main",
 		"DroomOne/flipperzero-tamagotch-p1/master",
 		"Dooskington/flipperzero-zombiez/main",
-		"xMasterX/heap-defence/main"
+		"xMasterX/heap-defence/main",
+		"Willzvul/Snake_2.0/main"
 	],
 	"Misc": [
 		"akopachov/flipper-zero_authenticator/master",
