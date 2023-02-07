@@ -4,7 +4,7 @@ const buildFap = app => new Promise((resolve, reject) => {
 			"accept": "application/json"
 		},
 		"method": "GET",
-	}).then(res => res.json()).then(res => resolve(res.fap.filename)).catch(reject);
+	}).then(res => res.json()).then(res => resolve(res.app.id + ".fap")).catch(reject);
 });
 const getFap = app => new Promise((resolve, reject) => {
 	fetch(`https://corsanywhere-taloud.onrender.com/https://flipc.org/api/v2/${app.path}/elf?branch=${app.branch}&nowerr=1`, {
